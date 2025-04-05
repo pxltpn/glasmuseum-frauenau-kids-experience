@@ -1,0 +1,261 @@
+:not(:defined) > * {
+  display: none;
+}
+
+model-viewer {
+  width: 100%;
+  height: 90%;
+  background-color: #ffffff;
+  height: 700px;
+}
+
+.progress-bar {
+  display: block;
+  width: 33%;
+  height: 10%;
+  max-height: 2%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  border-radius: 25px;
+  -webkit-box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.5),
+    0px 0px 5px 1px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.5),
+    0px 0px 5px 1px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.progress-bar.hide {
+  visibility: hidden;
+  -webkit-transition: visibility 0.3s;
+  -o-transition: visibility 0.3s;
+  transition: visibility 0.3s;
+}
+
+.update-bar {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 0%;
+  height: 100%;
+  border-radius: 25px;
+  float: left;
+  -webkit-transition: width 0.3s;
+  -o-transition: width 0.3s;
+  transition: width 0.3s;
+}
+
+#ar-button {
+  /* background-image: url(ar_icon.png); */
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  background-position: 12px 50%;
+  background-color: #fff;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  bottom: 16px;
+  padding: 0px 16px 0px 40px;
+  font-family: Roboto Regular, Helvetica Neue, sans-serif;
+  font-size: 14px;
+  color: #4285f4;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 18px;
+  border: 1px solid #dadce0;
+}
+
+#ar-button:active {
+  background-color: #e8eaed;
+}
+
+#ar-button:focus {
+  outline: none;
+}
+
+#ar-button:focus-visible {
+  outline: 1px solid #4285f4;
+}
+
+@-webkit-keyframes circle {
+  from {
+    -webkit-transform: translateX(-50%) rotate(0deg) translateX(50px)
+      rotate(0deg);
+    transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg);
+  }
+  to {
+    -webkit-transform: translateX(-50%) rotate(360deg) translateX(50px)
+      rotate(-360deg);
+    transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg);
+  }
+}
+
+@keyframes circle {
+  from {
+    -webkit-transform: translateX(-50%) rotate(0deg) translateX(50px)
+      rotate(0deg);
+    transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg);
+  }
+  to {
+    -webkit-transform: translateX(-50%) rotate(360deg) translateX(50px)
+      rotate(-360deg);
+    transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg);
+  }
+}
+
+@-webkit-keyframes elongate {
+  from {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+  }
+  to {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+  }
+}
+
+@keyframes elongate {
+  from {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+  }
+  to {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+  }
+}
+
+model-viewer > #ar-prompt {
+  position: absolute;
+  left: 50%;
+  bottom: 60px;
+  -webkit-animation: elongate 2s infinite ease-in-out alternate;
+  animation: elongate 2s infinite ease-in-out alternate;
+  display: none;
+}
+
+model-viewer[ar-status="session-started"] > #ar-prompt {
+  display: block;
+}
+
+model-viewer > #ar-prompt > img {
+  -webkit-animation: circle 4s linear infinite;
+  animation: circle 4s linear infinite;
+}
+
+/* Custom Marker */
+model-viewer button {
+  --min-hotspot-opacity: 0;
+  position: relative;
+  width: 10px !important;
+  height: 10px !important;
+  border: 0;
+  background-color: #dc6d2d !important;
+  border-radius: 10px !important;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: pointer;
+  padding: 0 !important;
+}
+
+model-viewer button:not(:hover) {
+  z-index: 0;
+  position: initial;
+}
+
+model-viewer button:hover {
+  z-index: 10;
+  position: relative;
+}
+
+model-viewer button.grey {
+  background-color: #394040 !important;
+  border-color: inherit;
+}
+
+/* .annotation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  background-color: #fff;
+  position: absolute;
+  border-radius: 4px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translate(15px, -50%);
+  -ms-transform: translate(15px, -50%);
+  transform: translate(15px, -50%);
+  visibility: hidden;
+} */
+
+model-viewer button a:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+model-viewer button .annotation {
+  padding: 10px 15px;
+  line-height: 1.1;
+}
+
+.annotation a:hover path {
+  fill: white;
+}
+
+.model-filter label {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid var(--orange);
+  border-left: 0;
+  border-top: 0;
+  padding: 10px 18px;
+  display: inline-block;
+}
+
+.model-filter input {
+  height: 24px;
+  width: 24px;
+  border: 1px solid var(--black);
+  border-radius: 50%;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.model-filter input[type="checkbox"]:checked:before {
+  content: "";
+  background-color: var(--orange);
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  margin: initial;
+}
