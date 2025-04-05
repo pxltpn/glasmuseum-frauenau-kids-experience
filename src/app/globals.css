@@ -33,6 +33,10 @@
     --ring: 224 71.4% 4.1%;
 
     --radius: 0.5rem;
+
+    /* Add font variables */
+    --font-myriadPro: 'Myriad Pro', sans-serif;
+    --font-belyDisplay: 'Bely Display', serif;
   }
 
   .dark {
@@ -72,18 +76,15 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Myriad Pro', sans-serif;
   }
-}
 
-body * {
-  font-family: "Myriad Pro", sans-serif;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Bely Display", serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Bely Display', serif;
+  }
 }

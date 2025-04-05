@@ -1,123 +1,61 @@
-'use client';
-
-import * as React from 'react';
-import * as DialogPrimitive from '@radix-ui/react-dialog';
+import React from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { X } from 'lucide-react';
 
-import { cn } from '@/lib/utils';
+import { formatDate } from '@/utils/format-date';
 
-const Dialog = DialogPrimitive.Root;
+const animation = {
+  initial: { opacity: 0 },
+  exit: { opacity: 0 },
+};
 
-const DialogTrigger = DialogPrimitive.Trigger;
+export const Dialog = ({ currentSlide, onClose }) => {
+  return (
+    <>
+      <motion.div
+        animate={{ opacity: 0.8 }}
+        {...animation}
+        className="fixed bg-[#000] w-full h-dvh z-20"
+        onClick={onClose}
+      ></motion.div>
+      <motion.div
+        animate={{ opacity: 1 }}
+        {...animation}
+        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-[80vw] bg-white p-[4vw] rounded-[1vw] flex flex-col gap-[3vw] shadow-lg"
+      >
+        <div
+          className="absolute border-accent border-[0.3vw] rounded-full right-[1.5vw] top-[1.5vw] ring-offset-background transition-opacity hover:opacity-100 focus:outline-none bg-white"
+          onClick={onClose}
+        >
+          <X className="h-[4vw] w-[4vw]" color="#ff6e32" />
+          <span className="sr-only">Close</span>
+        </div>
 
-const DialogPortal = DialogPrimitive.Portal;
+        <Image
+          className="w-full aspect-4/3 object-cover rounded-[1vw]"
+          src={`${currentSlide._embedded['wp:featuredmedia']['0'].source_url}`}
+          alt={`${currentSlide.title.rendered}`}
+          width={1200}
+          height={1200}
+        />
+        <div className="space-y-[3vw]">
+          <div className="text-[3.2vw] leading-[3.2vw]">
+            {formatDate(currentSlide.acf['start-date'], 'dd.MM.yy')} –
+            {formatDate(currentSlide.acf['end-date'], 'dd.MM.yy')}
+          </div>
+          <h3
+            className="uppercase text-md text-[3.4vw] leading-[4vw] hyphens-auto"
+            dangerouslySetInnerHTML={{
+              __html: currentSlide.title.rendered,
+            }}
+          />
 
-const DialogClose = DialogPrimitive.Close;
-
-const DialogOverlay = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Overlay
-    ref={ref}
-    className={cn(
-      'fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-      className
-    )}
-    {...props}
-  />
-));
-DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
-
-const DialogContent = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <DialogPortal>
-    <DialogOverlay />
-    <DialogPrimitive.Content
-      ref={ref}
-      className={cn(
-        'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-[80vw] gap-4 border bg-background p-[3vw] shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg',
-        className
-      )}
-      {...props}
-    >
-      {children}
-      <DialogPrimitive.Close className="absolute border-accent border-[0.3vw] rounded-full right-4 top-4 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-        <X className="h-[4vw] w-[4vw]" color="#ff6e32" />
-        <span className="sr-only">Close</span>
-      </DialogPrimitive.Close>
-    </DialogPrimitive.Content>
-  </DialogPortal>
-));
-DialogContent.displayName = DialogPrimitive.Content.displayName;
-
-const DialogHeader = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      'flex flex-col space-y-1.5 text-center sm:text-left',
-      className
-    )}
-    {...props}
-  />
-);
-DialogHeader.displayName = 'DialogHeader';
-
-const DialogFooter = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      'flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2',
-      className
-    )}
-    {...props}
-  />
-);
-DialogFooter.displayName = 'DialogFooter';
-
-const DialogTitle = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Title>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Title
-    ref={ref}
-    className={cn(
-      'text-lg font-semibold leading-none tracking-tight',
-      className
-    )}
-    {...props}
-  />
-));
-DialogTitle.displayName = DialogPrimitive.Title.displayName;
-
-const DialogDescription = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Description
-    ref={ref}
-    className={cn('text-[2vw]', className)}
-    {...props}
-  />
-));
-
-DialogDescription.displayName = DialogPrimitive.Description.displayName;
-
-export {
-  Dialog,
-  DialogPortal,
-  DialogOverlay,
-  DialogClose,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
+          <p className="text-[2vw]">
+            {currentSlide.acf['content'].slice(0, 200)}...
+          </p>
+        </div>
+      </motion.div>
+    </>
+  );
 };

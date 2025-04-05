@@ -1,4 +1,4 @@
-import { Hand, SkipForward, ArrowLeft } from 'lucide-react';
+import { Hand, ArrowLeft } from 'lucide-react';
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button-new';
 import { useClickSound } from '@/hooks/use-click-sound';
@@ -89,7 +89,7 @@ export const VideoDurandl: React.FC<VideoDurandlProps> = ({
     <div>
       <video
         ref={videoRef}
-        className="w-full border-[0.4vw] h-dvh object-cover"
+        className="w-full border-0 h-dvh object-cover"
         playsInline
         autoPlay
         muted
