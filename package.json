@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "electron": "electron .",
-    "dist": "electron-builder"
+    "dist": "rimraf dist && electron-builder"
   },
   "dependencies": {
     "@google/model-viewer": "^3.4.0",
@@ -40,6 +40,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "postcss": "^8",
+    "rimraf": "^6.0.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   },

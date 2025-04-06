@@ -39,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body>
+      <body className={`${myriadPro.variable} ${belyDisplay.variable}`}>
         <Providers>{children}</Providers>
         <GlobalMenu />
       </body>

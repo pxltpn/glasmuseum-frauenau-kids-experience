@@ -1,52 +1,62 @@
-const { app, BrowserWindow, globalShortcut } = require('electron');
-const path = require('path');
-const fs = require('fs');
+const { app, BrowserWindow, globalShortcut, screen } = require('electron');
 
-function getKioskPage() {
-  // Define the path to the config file in app storage
-  const configPath = path.join(app.getPath('userData'), 'config.json');
+function createWindows() {
+  const displays = screen.getAllDisplays();
 
-  if (fs.existsSync(configPath)) {
-    const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-    return config.page || '/';
+  if (displays.length < 2) {
+    console.error('You need at least two displays connected.');
+    app.quit();
+    return;
   }
 
-  // Default fallback
-  return '/';
-}
-
-function createWindow() {
-  const pagePath = getKioskPage();
-
-  const win = new BrowserWindow({
+  // Display 1 → shows "/"
+  const mainDisplay = displays[0];
+  const win1 = new BrowserWindow({
+    x: mainDisplay.bounds.x,
+    y: mainDisplay.bounds.y,
+    width: mainDisplay.bounds.width,
+    height: mainDisplay.bounds.height,
     fullscreen: true,
     kiosk: true,
     webPreferences: {
       nodeIntegration: false,
     },
   });
+  win1.loadURL('http://localhost:3000/');
 
-  // Load the Next.js page (running locally or hosted)
-  win.loadURL(`http://localhost:3000${pagePath}`);
+  // Display 2 → shows "/screen2"
+  const secondDisplay = displays[1];
+  const win2 = new BrowserWindow({
+    x: secondDisplay.bounds.x,
+    y: secondDisplay.bounds.y,
+    width: secondDisplay.bounds.width,
+    height: secondDisplay.bounds.height,
+    fullscreen: true,
+    kiosk: true,
+    webPreferences: {
+      nodeIntegration: false,
+    },
+  });
+  win2.loadURL('http://localhost:3000/screen2');
 
-  // Quit with Cmd/Ctrl + Shift + Q
+  // Optional: same quit shortcut applies to both
   globalShortcut.register('CommandOrControl+Shift+Q', () => {
     app.quit();
-  });
-
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 }
 
 app.whenReady().then(() => {
-  createWindow();
+  createWindows();
 
-  app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') app.quit();
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindows();
   });
 });
 
 app.on('will-quit', () => {
   globalShortcut.unregisterAll();
+});
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit();
 });

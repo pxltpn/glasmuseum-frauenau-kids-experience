@@ -17,13 +17,13 @@ export const Exhibitions = () => {
   // Filter data to only show current exhibitions (based on the acf.start-date field in the form of YYYYMMDD)
   const currentDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
 
-  // const currentExhibitions = data?.filter((exhibition: any) => {
-  //   const startDate = exhibition.acf['start-date'];
-  //   const endDate = exhibition.acf['end-date'];
-  //   return startDate <= currentDate && currentDate <= endDate;
-  // });
+  const currentExhibitions = data?.filter((exhibition: any) => {
+    const startDate = exhibition.acf['start-date'];
+    const endDate = exhibition.acf['end-date'];
+    return startDate <= currentDate && currentDate <= endDate;
+  });
 
-  const currentExhibitions = data;
+  // const currentExhibitions = data;
 
   return (
     <>

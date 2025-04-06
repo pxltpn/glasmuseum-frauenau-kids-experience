@@ -34,9 +34,9 @@
 
     --radius: 0.5rem;
 
-    /* Add font variables */
-    --font-myriadPro: 'Myriad Pro', sans-serif;
-    --font-belyDisplay: 'Bely Display', serif;
+    /* Font variables (using the CSS variables from next/font) */
+    --font-myriadPro: var(--font-myriadPro);
+    --font-belyDisplay: var(--font-belyDisplay);
   }
 
   .dark {
@@ -71,12 +71,8 @@
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply bg-background text-foreground;
-    font-family: 'Myriad Pro', sans-serif;
+    font-family: var(--font-myriadPro), sans-serif; /* Use variable */
   }
 
   h1,
@@ -85,6 +81,6 @@
   h4,
   h5,
   h6 {
-    font-family: 'Bely Display', serif;
+    font-family: var(--font-belyDisplay), serif; /* Use variable */
   }
 }
