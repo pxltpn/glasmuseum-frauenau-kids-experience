@@ -22,7 +22,7 @@ function createWindows() {
       nodeIntegration: false,
     },
   });
-  win1.loadURL('http://localhost:3000/');
+  win1.loadURL('https://www.youtube.com/');
 
   // Display 2 → shows "/screen2"
   const secondDisplay = displays[1];
@@ -37,7 +37,7 @@ function createWindows() {
       nodeIntegration: false,
     },
   });
-  win2.loadURL('http://localhost:3000/screen2');
+  win2.loadURL('https://www.youtube.com/watch?v=-uMGMmqMleM');
 
   // Optional: same quit shortcut applies to both
   globalShortcut.register('CommandOrControl+Shift+Q', () => {

@@ -3,8 +3,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "glasmuseum-frauenau.de",
+        protocol: 'https',
+        hostname: 'glasmuseum-frauenau.de',
       },
     ],
   },

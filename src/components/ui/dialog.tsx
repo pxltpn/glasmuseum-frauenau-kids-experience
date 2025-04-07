@@ -10,7 +10,26 @@ const animation = {
   exit: { opacity: 0 },
 };
 
-export const Dialog = ({ currentSlide, onClose }) => {
+type DialogPropTypes = {
+  currentSlide: {
+    _embedded: {
+      'wp:featuredmedia': Array<{
+        source_url: string;
+      }>;
+    };
+    title: {
+      rendered: string;
+    };
+    acf: {
+      'start-date': string;
+      'end-date': string;
+      content: string;
+    };
+  };
+  onClose: () => void;
+};
+
+export const Dialog = ({ currentSlide, onClose }: DialogPropTypes) => {
   return (
     <>
       <motion.div
