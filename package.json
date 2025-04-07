@@ -8,17 +8,31 @@
     "build": "next build",
     "start": "next start",
     "electron": "electron .",
-    "dist": "npm run build && electron ."
+    "dist": "rimraf dist && electron-builder"
   },
   "build": {
     "appId": "com.example.app",
-    "productName": "YourApp",
+    "productName": "Glasmuseum Kids Experience",
     "files": [
-      "out/**/*",
       "main.js"
     ],
     "directories": {
-      "output": "dist"
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "mac": {
+      "icon": "icon.png",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "icon": "icon.ico",
+      "target": [
+        "nsis",
+        "zip"
+      ]
     }
   },
   "dependencies": {

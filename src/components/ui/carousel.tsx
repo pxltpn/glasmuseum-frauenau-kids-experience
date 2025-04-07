@@ -57,11 +57,10 @@ const Carousel = ({ children }: CarouseProps) => {
   }, [emblaApi]);
 
   return (
+    //please check global.css for embla styles
     <section className="embla relative">
-      <div className="embla__viewport overflow-hidden" ref={emblaRef}>
-        <div className="embla__container flex gap-[2vw] touch-pan-y touch-pinch-zoom">
-          {children}
-        </div>
+      <div className="embla__viewport" ref={emblaRef}>
+        <div className="embla__container">{children}</div>
       </div>
       {canScrollNext && (
         <Next
@@ -90,7 +89,8 @@ type CarouselItemProps = {
 
 const CarouselItem = ({ children, ...props }: CarouselItemProps) => {
   return (
-    <div className="flex-[0_0_calc(50%-1vw)] items-start rounded-lg" {...props}>
+    //please check global.css for embla__slide styles
+    <div className="embla__slide flex items-start rounded-lg" {...props}>
       {children}
     </div>
   );

@@ -22,7 +22,7 @@ function createWindows() {
       nodeIntegration: false,
     },
   });
-  win1.loadURL('https://www.youtube.com/');
+  win1.loadURL('https://glasmuseum-frauenau.vercel.app/');
 
   // Display 2 → shows "/screen2"
   const secondDisplay = displays[1];
@@ -37,7 +37,7 @@ function createWindows() {
       nodeIntegration: false,
     },
   });
-  win2.loadURL('https://www.youtube.com/watch?v=-uMGMmqMleM');
+  win2.loadURL('https://glasmuseum-frauenau.vercel.app/screen2');
 
   // Optional: same quit shortcut applies to both
   globalShortcut.register('CommandOrControl+Shift+Q', () => {
