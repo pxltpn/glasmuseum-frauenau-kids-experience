@@ -37,11 +37,11 @@ export const KlickpunkteModel = () => {
       <model-viewer
         style={{ height: '100%' }}
         className="h-full w-full"
-        auto-rotate=""
+        auto-rotate={true}
         enable-pan=""
-        src="/model/glasmuseum-3.glb"
+        src="/model/glasmuseum.glb"
         ar-modes="webxr scene-viewer quick-look"
-        camera-controls=""
+        camera-controls={true}
         environment-image="/model/lightroom_14b.hdr"
         shadow-intensity="1"
         ar-status="not-presenting"
