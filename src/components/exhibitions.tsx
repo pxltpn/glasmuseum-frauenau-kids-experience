@@ -61,7 +61,7 @@ export const Exhibitions = () => {
                   key={index}
                   onClick={() => setCurrentSlide(exhibition)}
                 >
-                  <div className="border-[0.4vw] rounded-[2vw] text-[#374040] p-[2vw] h-full w-full">
+                  <div className="border-[0.4vw] rounded-[2vw] text-[#374040] p-[2vw] h-full w-full break-words hyphens-auto">
                     <div className="flex flex-col gap-[2vw]">
                       <div className="text-[3.2vw] leading-[3.2vw] text-left">
                         {formatDate(exhibition.acf['start-date'], 'dd.MM.yy')} –
