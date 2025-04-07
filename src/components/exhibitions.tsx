@@ -36,7 +36,7 @@ export const Exhibitions = () => {
         )}
       </AnimatePresence>
 
-      <div className="p-[10vw] flex flex-col gap-[4dvh] py-[5dvh] space-y-[3vw]">
+      <div className="p-[10vw] flex flex-col gap-[4vh] py-[5vh] space-y-[3vw]">
         <div className="flex items-center justify-between">
           <h2 className="text-[6vw] leading-[7vw] text-[#374040] uppercase">
             News

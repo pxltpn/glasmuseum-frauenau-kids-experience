@@ -47,7 +47,7 @@ export const KlickpunkteModel = () => {
         ar-status="not-presenting"
       ></model-viewer>
       <div>
-        <div className="px-[10vw] py-[4dvh] w-full h-full bg-white bg-opacity-80 text-slate-900 flex flex-col space-y-[3vw]">
+        <div className="px-[10vw] py-[4vh] w-full h-full bg-white bg-opacity-80 text-slate-900 flex flex-col space-y-[3vw]">
           <h2 className="text-[3.2vw]">Legende</h2>
           <ul className="text-[2.4vw] grid grid-cols-2">
             {areas.map((area, index) => (

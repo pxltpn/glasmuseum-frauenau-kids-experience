@@ -18,12 +18,10 @@ export const VideoDurandl: React.FC<VideoDurandlProps> = ({
 }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  // const durandl_video_source = '/videos/durandl_voiceover.mp4';
+  const playClickSound = useClickSound();
 
   const durandl_video_source =
     'https://glasmuseum-frauenau.de/wp-content/uploads/videos/durandl_voiceover.mp4';
-
-  const playClickSound = useClickSound('/sounds/click.wav');
 
   useEffect(() => {
     const video = videoRef.current;
@@ -86,10 +84,10 @@ export const VideoDurandl: React.FC<VideoDurandlProps> = ({
   };
 
   return (
-    <div>
+    <div className="relative h-vh">
       <video
         ref={videoRef}
-        className="w-full border-0 h-dvh object-cover"
+        className="w-full border-0 h-[100vh] object-cover"
         playsInline
         autoPlay
         muted
@@ -106,7 +104,7 @@ export const VideoDurandl: React.FC<VideoDurandlProps> = ({
       )}
 
       {!screenTouched && (
-        <Button onClick={() => {}} className="bg-white/90 text-slate-800">
+        <Button className="bg-white/90 text-slate-800">
           <span>Bitte Bildschirm tippen</span>
           <Hand size={'5vw'} />
         </Button>
