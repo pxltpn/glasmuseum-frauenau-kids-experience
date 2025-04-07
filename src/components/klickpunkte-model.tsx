@@ -45,6 +45,8 @@ export const KlickpunkteModel = () => {
         environment-image="/model/lightroom_14b.hdr"
         shadow-intensity="1"
         ar-status="not-presenting"
+        camera-orbit="90deg 55deg 0.8m"
+        camera-target="0m 0m 0m" // Focus on the center
       ></model-viewer>
       <div>
         <div className="px-[10vw] py-[4vh] w-full h-full bg-white bg-opacity-80 text-slate-900 flex flex-col space-y-[3vw]">

@@ -19,7 +19,7 @@ export const Button = ({ children, onClick, className }: ButtonProps) => {
       }}
       exit={{ opacity: 0, translateY: 0 }}
       className={cn(
-        'shadow-xl fixed z-10 bottom-[4vh] w-max right-0 left-0 mx-auto flex justify-center items-center gap-[1.5vw] text-[4vw] uppercase p-[2vw] px-[1.5vw] pr-[3vw] cursor-pointer',
+        'shadow-xl flex justify-center items-center gap-[1.5vw] uppercase p-[1vw] px-[1.5vw] pr-[3vw] cursor-pointer',
         className
       )}
     >

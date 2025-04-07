@@ -35,7 +35,7 @@ export const Dialog = ({ currentSlide, onClose }: DialogPropTypes) => {
       <motion.div
         animate={{ opacity: 0.8 }}
         {...animation}
-        className="fixed bg-[#000] w-full h-vh z-20"
+        className="fixed bg-[#000] w-full h-[100vh] z-20"
         onClick={onClose}
       ></motion.div>
       <motion.div

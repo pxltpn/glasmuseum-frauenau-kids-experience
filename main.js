@@ -1,45 +1,46 @@
 const { app, BrowserWindow, globalShortcut, screen } = require('electron');
+const path = require('path');
+const isDev = require('electron-is-dev');
+
+function createWindow(display, url) {
+  const win = new BrowserWindow({
+    x: display.bounds.x,
+    y: display.bounds.y,
+    width: display.bounds.width,
+    height: display.bounds.height,
+    fullscreen: true,
+    kiosk: true,
+    webPreferences: {
+      nodeIntegration: false,
+    },
+  });
+
+  if (isDev) {
+    // Load the development server during development
+    win.loadURL(url);
+  } else {
+    // Load the local build in production
+    win.loadFile(path.join(__dirname, 'out', 'index.html'));
+  }
+
+  return win;
+}
 
 function createWindows() {
   const displays = screen.getAllDisplays();
 
-  if (displays.length < 2) {
-    console.error('You need at least two displays connected.');
-    app.quit();
-    return;
+  if (displays.length === 1) {
+    // Single display → show "/"
+    createWindow(displays[0], 'http://localhost:3000/');
+  } else if (displays.length >= 2) {
+    // Display 1 → shows "/"
+    createWindow(displays[0], 'http://localhost:3000/');
+
+    // Display 2 → shows "/screen2"
+    createWindow(displays[1], 'http://localhost:3000/screen2');
   }
 
-  // Display 1 → shows "/"
-  const mainDisplay = displays[0];
-  const win1 = new BrowserWindow({
-    x: mainDisplay.bounds.x,
-    y: mainDisplay.bounds.y,
-    width: mainDisplay.bounds.width,
-    height: mainDisplay.bounds.height,
-    fullscreen: true,
-    kiosk: true,
-    webPreferences: {
-      nodeIntegration: false,
-    },
-  });
-  win1.loadURL('https://glasmuseum-frauenau.vercel.app/');
-
-  // Display 2 → shows "/screen2"
-  const secondDisplay = displays[1];
-  const win2 = new BrowserWindow({
-    x: secondDisplay.bounds.x,
-    y: secondDisplay.bounds.y,
-    width: secondDisplay.bounds.width,
-    height: secondDisplay.bounds.height,
-    fullscreen: true,
-    kiosk: true,
-    webPreferences: {
-      nodeIntegration: false,
-    },
-  });
-  win2.loadURL('https://glasmuseum-frauenau.vercel.app/screen2');
-
-  // Optional: same quit shortcut applies to both
+  // Optional: same quit shortcut applies to all cases
   globalShortcut.register('CommandOrControl+Shift+Q', () => {
     app.quit();
   });
