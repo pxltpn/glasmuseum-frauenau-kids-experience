@@ -85,6 +85,10 @@
   }
 }
 
+.embla {
+  margin-top: 0 !important;
+}
+
 .embla__viewport {
   overflow: hidden;
 }

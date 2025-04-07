@@ -18,7 +18,7 @@ export default function Page() {
         strategy="lazyOnload"
         src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"
       />
-      <main className="flex flex-col min-h-screen ">
+      <main className="flex flex-col min-h-screen max-h-screen">
         <Exhibitions />
         <KlickpunkteModel />
       </main>
