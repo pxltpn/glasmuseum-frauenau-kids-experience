@@ -24,7 +24,7 @@ export const VideoDurandl: React.FC<VideoDurandlProps> = ({
   const playClickSound = useClickSound();
 
   const durandl_video_source =
-    'https://glasmuseum-frauenau.de/wp-content/uploads/videos/durandl_voiceover.mp4';
+    'https://storage.googleapis.com/glameseum/durandl_voiceover.mp4';
 
   useEffect(() => {
     const video = videoRef.current;
